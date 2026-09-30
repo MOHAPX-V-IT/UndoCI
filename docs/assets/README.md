@@ -1,0 +1,8 @@
+# Visual assets
+
+- `undoci-banner.png`: generated for this project with the built-in ImageGen tool on 2026-09-30. The user-supplied ActionContract image was a visual style reference only. The name, tagline and rollback composition belong to this UndoCI presentation.
+- `report-preview.png`: actual browser screenshot of the bundled enum demonstration, showing 14 rehearsals and a three-action reproducer. This is synthetic fixture evidence, not a customer benchmark.
+
+## Banner generation prompt
+
+Use case: ads-marketing. Create a polished wide 16:9 GitHub README hero banner for an open-source developer tool named UndoCI. Reference image 1 is STYLE ONLY: black industrial architectural 3D render, subtle technical grid and drafting lines, glowing amber orange edges, white confident oversized sans typography, smaller monospaced tagline. Make an original composition: right half contains three monumental dark graphite rectangular release gates standing on reflective dark stone floor; a luminous amber ribbon runs through them, then curves back into a clear U-turn arrow toward an earlier gate, representing release rollback. Precise wireframe outlines, restrained warm light, premium engineering aesthetic. Left half has ample uncluttered black space with exact large white text "UndoCI" and below exact small white monospace text "Ship forward. Know your way back." Top left tiny "ROLLBACK REHEARSAL". Bottom left small "OPEN SOURCE / PYTHON". Bottom right small "RELEASE / REWIND / VERIFY". All text legible, perfectly spelled, generous safe margins. Do not include ActionContract or any brand from reference. No extra text, no watermark. Landscape cinematic composition.

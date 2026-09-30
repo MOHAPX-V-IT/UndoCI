@@ -1,0 +1,205 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-30T13:54:13.250448+00:00",
+  "title": "Design System: UndoCI",
+  "extensions": {
+    "colorMeta": {
+      "bg": {
+        "role": "neutral",
+        "displayName": "Near-black graphite",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(49% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
+          "oklch(95% 0 0)"
+        ],
+        "rampSource": "Synthesized visualization only; not an implementation token."
+      },
+      "panel": {
+        "role": "neutral",
+        "displayName": "Graphite panel",
+        "tonalRamp": [
+          "oklch(15% 0.004 250)",
+          "oklch(26% 0.004 250)",
+          "oklch(38% 0.004 250)",
+          "oklch(49% 0.004 250)",
+          "oklch(61% 0.004 250)",
+          "oklch(72% 0.004 250)",
+          "oklch(84% 0.004 250)",
+          "oklch(95% 0.004 250)"
+        ],
+        "rampSource": "Synthesized visualization only; not an implementation token."
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Structural graphite",
+        "tonalRamp": [
+          "oklch(15% 0.008 250)",
+          "oklch(26% 0.008 250)",
+          "oklch(38% 0.008 250)",
+          "oklch(49% 0.008 250)",
+          "oklch(61% 0.008 250)",
+          "oklch(72% 0.008 250)",
+          "oklch(84% 0.008 250)",
+          "oklch(95% 0.008 250)"
+        ],
+        "rampSource": "Synthesized visualization only; not an implementation token."
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "Warm pale text",
+        "tonalRamp": [
+          "oklch(15% 0.01 90)",
+          "oklch(26% 0.01 90)",
+          "oklch(38% 0.01 90)",
+          "oklch(49% 0.01 90)",
+          "oklch(61% 0.01 90)",
+          "oklch(72% 0.01 90)",
+          "oklch(84% 0.01 90)",
+          "oklch(95% 0.01 90)"
+        ],
+        "rampSource": "Synthesized visualization only; not an implementation token."
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted grey",
+        "tonalRamp": [
+          "oklch(15% 0.012 250)",
+          "oklch(26% 0.012 250)",
+          "oklch(38% 0.012 250)",
+          "oklch(49% 0.012 250)",
+          "oklch(61% 0.012 250)",
+          "oklch(72% 0.012 250)",
+          "oklch(84% 0.012 250)",
+          "oklch(95% 0.012 250)"
+        ],
+        "rampSource": "Synthesized visualization only; not an implementation token."
+      },
+      "amber": {
+        "role": "primary",
+        "displayName": "Engineering amber",
+        "tonalRamp": [
+          "oklch(15% 0.13 70)",
+          "oklch(26% 0.13 70)",
+          "oklch(38% 0.13 70)",
+          "oklch(49% 0.13 70)",
+          "oklch(61% 0.13 70)",
+          "oklch(72% 0.13 70)",
+          "oklch(84% 0.13 70)",
+          "oklch(95% 0.13 70)"
+        ],
+        "rampSource": "Synthesized visualization only; not an implementation token."
+      },
+      "green": {
+        "role": "secondary",
+        "displayName": "Passed green",
+        "tonalRamp": [
+          "oklch(15% 0.09 155)",
+          "oklch(26% 0.09 155)",
+          "oklch(38% 0.09 155)",
+          "oklch(49% 0.09 155)",
+          "oklch(61% 0.09 155)",
+          "oklch(72% 0.09 155)",
+          "oklch(84% 0.09 155)",
+          "oklch(95% 0.09 155)"
+        ],
+        "rampSource": "Synthesized visualization only; not an implementation token."
+      },
+      "red": {
+        "role": "secondary",
+        "displayName": "Failure red",
+        "tonalRamp": [
+          "oklch(15% 0.1 25)",
+          "oklch(26% 0.1 25)",
+          "oklch(38% 0.1 25)",
+          "oklch(49% 0.1 25)",
+          "oklch(61% 0.1 25)",
+          "oklch(72% 0.1 25)",
+          "oklch(84% 0.1 25)",
+          "oklch(95% 0.1 25)"
+        ],
+        "rampSource": "Synthesized visualization only; not an implementation token."
+      }
+    },
+    "shadows": [],
+    "motion": [],
+    "breakpoints": [
+      {
+        "name": "compact",
+        "value": "760px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Verdict",
+      "kind": "chip",
+      "refersTo": "verdict",
+      "description": "Extracted from the existing offline report.",
+      "html": "<span class=\"ds-verdict\">INCONCLUSIVE</span>",
+      "css": ".ds-verdict{display:inline-block;padding:7px 12px;border:1px solid currentColor;color:var(--amber,#ffb14a);font:12px/1.4 ui-monospace,monospace;letter-spacing:.06em;text-transform:uppercase}"
+    },
+    {
+      "name": "Evidence downloads",
+      "kind": "nav",
+      "description": "Extracted from the existing offline report.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Evidence downloads\"><a href=\"report.json\" download>JSON</a><a href=\"junit.xml\" download>JUnit</a><a href=\"replay.json\" download>Replay manifest</a></nav>",
+      "css": ".ds-nav{display:flex;gap:24px;font:14px/1.6 system-ui,sans-serif}.ds-nav a{color:var(--muted,#adb1b7);text-underline-offset:4px}.ds-nav a:hover{color:var(--text,#f2f0ea)}.ds-nav a:focus-visible{outline:2px solid var(--amber,#ffb14a);outline-offset:5px}@media(max-width:760px){.ds-nav{gap:14px;flex-wrap:wrap;justify-content:flex-end;max-width:180px}}"
+    },
+    {
+      "name": "Rehearsal filter",
+      "kind": "input",
+      "refersTo": "filter",
+      "description": "Extracted from the existing offline report.",
+      "html": "<label class=\"ds-filter\">Show<select><option>All rehearsals</option><option>Rollback failures</option><option>Passed</option><option>Invalid scenarios</option><option>Execution errors</option></select></label>",
+      "css": ".ds-filter{display:flex;align-items:center;gap:12px;color:var(--text,#f2f0ea);font:14px/1.6 system-ui,sans-serif}.ds-filter select{font:inherit;color:var(--text,#f2f0ea);background:var(--panel,#191b1d);border:1px solid var(--line,#35383c);padding:8px 12px;border-radius:4px;color-scheme:dark}.ds-filter select:focus-visible{outline:2px solid var(--amber,#ffb14a);outline-offset:5px}"
+    },
+    {
+      "name": "Failure signature",
+      "kind": "card",
+      "refersTo": "signature",
+      "description": "Extracted from the existing offline report.",
+      "html": "<div class=\"ds-signature\"><code>verify/old-still-reads/status</code></div>",
+      "css": ".ds-signature{background:var(--panel,#191b1d);color:var(--text,#f2f0ea);padding:18px;margin:17px 0;overflow-wrap:anywhere}.ds-signature code{font:13px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace}"
+    },
+    {
+      "name": "Rehearsal disclosure",
+      "kind": "custom",
+      "refersTo": "journal-row",
+      "description": "Extracted from the existing offline report.",
+      "html": "<details class=\"ds-trial\"><summary><span class=\"ds-id\">trial-001</span><span class=\"ds-state\">regression</span><span>3 actions</span><span class=\"ds-time\">2.04s</span></summary><div class=\"ds-body\">Expected HTTP 200, received HTTP 500.</div></details>",
+      "css": ".ds-trial{border-block:1px solid var(--line,#35383c);color:var(--text,#f2f0ea);font:14px/1.6 system-ui,sans-serif}.ds-trial summary{display:grid;grid-template-columns:1fr 1fr 1fr 90px;gap:15px;cursor:pointer;padding:18px 14px;align-items:center}.ds-trial summary:hover{background:var(--panel,#191b1d)}.ds-trial summary:focus-visible{outline:2px solid var(--amber,#ffb14a);outline-offset:5px}.ds-id{font:14px ui-monospace,monospace}.ds-id:before{content:\"+\";display:inline-block;width:24px;color:var(--muted,#adb1b7)}.ds-trial[open] .ds-id:before{content:\"−\"}.ds-state{font:12px/1.4 ui-monospace,monospace;text-transform:uppercase;letter-spacing:.06em;color:var(--amber,#ffb14a)}.ds-time{font:13px ui-monospace,monospace;color:var(--muted,#adb1b7);text-align:right}.ds-body{padding:4px 14px 24px}@media(max-width:760px){.ds-trial summary{grid-template-columns:1fr 1fr;gap:8px}.ds-time{text-align:left}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The rollback evidence ledger",
+    "overview": "This is a descriptive metaphor derived from the existing report, not a newly approved brand concept. The report pairs a large, plain-language verdict with dense technical evidence. A graphite canvas, restrained amber emphasis, system typography, and fine dividers keep attention on the investigation.\n\nScope: the incumbent offline report in `src/undoci/templates/report.html`, its generated journal markup in `src/undoci/report.py`, and the rendered `docs/assets/report-preview.png`. The README banner is a related identity asset; its image treatment does not prescribe report layout.",
+    "keyCharacteristics": [
+      "A prominent verdict followed by progressively detailed evidence.",
+      "Flat surfaces and thin structural dividers.",
+      "Monospace identifiers, state labels, and timing.",
+      "Native browser controls and locally embedded assets."
+    ],
+    "rules": [
+      {
+        "name": "The Evidence Rule",
+        "body": "Keep explicit status and retained/removed text beside color; the implementation does not communicate these distinctions through color alone.",
+        "section": "colors"
+      }
+    ],
+    "dos": [
+      "Do preserve text labels alongside status colors.",
+      "Do keep identifiers and evidence readable with wrapping or local table scrolling.",
+      "Do retain the report's offline system fonts and embedded assets."
+    ],
+    "donts": [
+      "Don't replace structural rules with elevated card styling when extending this report.",
+      "Don't turn the report's limited evidence into a universal safety claim.",
+      "Don't invent new component variants or motion as if they were incumbent tokens."
+    ]
+  }
+}

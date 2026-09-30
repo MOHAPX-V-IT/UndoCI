@@ -1,0 +1,467 @@
+{
+  "$defs": {
+    "Analysis": {
+      "additionalProperties": false,
+      "properties": {
+        "max_trials": {
+          "default": 40,
+          "maximum": 1000,
+          "minimum": 1,
+          "title": "Max Trials",
+          "type": "integer"
+        },
+        "confirmations": {
+          "default": 2,
+          "maximum": 10,
+          "minimum": 1,
+          "title": "Confirmations",
+          "type": "integer"
+        }
+      },
+      "title": "Analysis",
+      "type": "object"
+    },
+    "Assertion": {
+      "additionalProperties": false,
+      "properties": {
+        "pointer": {
+          "default": "",
+          "title": "Pointer",
+          "type": "string"
+        },
+        "op": {
+          "default": "eq",
+          "enum": [
+            "eq",
+            "ne",
+            "contains",
+            "exists",
+            "length",
+            "gte",
+            "lte"
+          ],
+          "title": "Op",
+          "type": "string"
+        },
+        "value": {
+          "default": null,
+          "title": "Value"
+        }
+      },
+      "title": "Assertion",
+      "type": "object"
+    },
+    "Command": {
+      "additionalProperties": false,
+      "properties": {
+        "run": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Run",
+          "type": "array"
+        },
+        "timeout": {
+          "default": 60,
+          "exclusiveMinimum": 0,
+          "maximum": 3600,
+          "title": "Timeout",
+          "type": "number"
+        },
+        "cwd": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cwd"
+        },
+        "env": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Env",
+          "type": "object"
+        }
+      },
+      "required": [
+        "run"
+      ],
+      "title": "Command",
+      "type": "object"
+    },
+    "ComposeTarget": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "compose",
+          "title": "Kind",
+          "type": "string"
+        },
+        "file": {
+          "title": "File",
+          "type": "string"
+        },
+        "service": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+          "title": "Service",
+          "type": "string"
+        },
+        "old_image": {
+          "title": "Old Image",
+          "type": "string"
+        },
+        "new_image": {
+          "title": "New Image",
+          "type": "string"
+        },
+        "container_port": {
+          "default": 8000,
+          "maximum": 65535,
+          "minimum": 1,
+          "title": "Container Port",
+          "type": "integer"
+        },
+        "ready_path": {
+          "default": "/health",
+          "title": "Ready Path",
+          "type": "string"
+        },
+        "ready_status": {
+          "default": 200,
+          "maximum": 599,
+          "minimum": 100,
+          "title": "Ready Status",
+          "type": "integer"
+        },
+        "timeout": {
+          "default": 120,
+          "exclusiveMinimum": 0,
+          "maximum": 3600,
+          "title": "Timeout",
+          "type": "number"
+        }
+      },
+      "required": [
+        "kind",
+        "file",
+        "service",
+        "old_image",
+        "new_image"
+      ],
+      "title": "ComposeTarget",
+      "type": "object"
+    },
+    "Expect": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "default": 200,
+          "maximum": 599,
+          "minimum": 100,
+          "title": "Status",
+          "type": "integer"
+        },
+        "assertions": {
+          "items": {
+            "$ref": "#/$defs/Assertion"
+          },
+          "title": "Assertions",
+          "type": "array"
+        }
+      },
+      "title": "Expect",
+      "type": "object"
+    },
+    "Lifecycle": {
+      "additionalProperties": false,
+      "properties": {
+        "prepare": {
+          "items": {
+            "$ref": "#/$defs/Command"
+          },
+          "title": "Prepare",
+          "type": "array"
+        },
+        "upgrade": {
+          "items": {
+            "$ref": "#/$defs/Command"
+          },
+          "title": "Upgrade",
+          "type": "array"
+        },
+        "rollback": {
+          "items": {
+            "$ref": "#/$defs/Command"
+          },
+          "title": "Rollback",
+          "type": "array"
+        },
+        "cleanup": {
+          "items": {
+            "$ref": "#/$defs/Command"
+          },
+          "title": "Cleanup",
+          "type": "array"
+        }
+      },
+      "title": "Lifecycle",
+      "type": "object"
+    },
+    "ProcessTarget": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "process",
+          "default": "process",
+          "title": "Kind",
+          "type": "string"
+        },
+        "old": {
+          "$ref": "#/$defs/Service"
+        },
+        "new": {
+          "$ref": "#/$defs/Service"
+        }
+      },
+      "required": [
+        "old",
+        "new"
+      ],
+      "title": "ProcessTarget",
+      "type": "object"
+    },
+    "Request": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[a-zA-Z][a-zA-Z0-9_-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "method": {
+          "default": "GET",
+          "enum": [
+            "GET",
+            "POST",
+            "PUT",
+            "PATCH",
+            "DELETE",
+            "HEAD",
+            "OPTIONS"
+          ],
+          "title": "Method",
+          "type": "string"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "headers": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Headers",
+          "type": "object"
+        },
+        "body": {
+          "default": null,
+          "title": "Body"
+        },
+        "expect": {
+          "$ref": "#/$defs/Expect"
+        },
+        "capture": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Capture",
+          "type": "object"
+        },
+        "depends_on": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Depends On",
+          "type": "array"
+        },
+        "timeout": {
+          "default": 10,
+          "exclusiveMinimum": 0,
+          "maximum": 300,
+          "title": "Timeout",
+          "type": "number"
+        }
+      },
+      "required": [
+        "id",
+        "path"
+      ],
+      "title": "Request",
+      "type": "object"
+    },
+    "Service": {
+      "additionalProperties": false,
+      "properties": {
+        "run": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Run",
+          "type": "array"
+        },
+        "timeout": {
+          "default": 60,
+          "exclusiveMinimum": 0,
+          "maximum": 3600,
+          "title": "Timeout",
+          "type": "number"
+        },
+        "cwd": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cwd"
+        },
+        "env": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Env",
+          "type": "object"
+        },
+        "ready_path": {
+          "default": "/health",
+          "title": "Ready Path",
+          "type": "string"
+        },
+        "ready_status": {
+          "default": 200,
+          "maximum": 599,
+          "minimum": 100,
+          "title": "Ready Status",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "run"
+      ],
+      "title": "Service",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "const": 1,
+      "default": 1,
+      "title": "Version",
+      "type": "integer"
+    },
+    "name": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Name",
+      "type": "string"
+    },
+    "target": {
+      "discriminator": {
+        "mapping": {
+          "compose": "#/$defs/ComposeTarget",
+          "process": "#/$defs/ProcessTarget"
+        },
+        "propertyName": "kind"
+      },
+      "oneOf": [
+        {
+          "$ref": "#/$defs/ProcessTarget"
+        },
+        {
+          "$ref": "#/$defs/ComposeTarget"
+        }
+      ],
+      "title": "Target"
+    },
+    "env": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Env",
+      "type": "object"
+    },
+    "redact_env": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Redact Env",
+      "type": "array"
+    },
+    "lifecycle": {
+      "$ref": "#/$defs/Lifecycle"
+    },
+    "setup": {
+      "items": {
+        "$ref": "#/$defs/Request"
+      },
+      "title": "Setup",
+      "type": "array"
+    },
+    "baseline": {
+      "items": {
+        "$ref": "#/$defs/Request"
+      },
+      "minItems": 1,
+      "title": "Baseline",
+      "type": "array"
+    },
+    "actions": {
+      "items": {
+        "$ref": "#/$defs/Request"
+      },
+      "minItems": 1,
+      "title": "Actions",
+      "type": "array"
+    },
+    "candidate": {
+      "items": {
+        "$ref": "#/$defs/Request"
+      },
+      "minItems": 1,
+      "title": "Candidate",
+      "type": "array"
+    },
+    "verify": {
+      "items": {
+        "$ref": "#/$defs/Request"
+      },
+      "minItems": 1,
+      "title": "Verify",
+      "type": "array"
+    },
+    "analysis": {
+      "$ref": "#/$defs/Analysis"
+    }
+  },
+  "required": [
+    "name",
+    "target",
+    "baseline",
+    "actions",
+    "candidate",
+    "verify"
+  ],
+  "title": "Config",
+  "type": "object"
+}

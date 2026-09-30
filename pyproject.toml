@@ -1,0 +1,40 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "undoci"
+version = "0.1.0"
+description = "Rehearse releases. Find the write that breaks your rollback."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+dependencies = ["httpx>=0.28,<1", "pydantic>=2.12,<3", "PyYAML>=6.0.2,<7"]
+keywords = ["rollback", "ci", "testing", "migrations", "devtools"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Programming Language :: Python :: 3",
+  "Topic :: Software Development :: Testing",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-cov>=6", "ruff>=0.11", "build>=1.2"]
+
+[project.scripts]
+undoci = "undoci.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/undoci"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["integration: launches real local processes", "docker: requires a running Docker engine"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+

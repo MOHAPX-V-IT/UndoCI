@@ -1,0 +1,76 @@
+version: 1
+name: The refund that breaks rollback
+target:
+  kind: process
+  old:
+    run:
+    - ${UNDOCI_PYTHON}
+    - ${UNDOCI_CONFIG_DIR}/app.py
+    - --version
+    - old
+  new:
+    run:
+    - ${UNDOCI_PYTHON}
+    - ${UNDOCI_CONFIG_DIR}/app.py
+    - --version
+    - new
+setup:
+- id: seed-order
+  method: POST
+  path: /orders
+  body:
+    amount: 100
+  expect:
+    status: 201
+baseline:
+- id: old-can-read
+  path: /orders
+  expect:
+    assertions:
+    - pointer: ''
+      op: length
+      value: 1
+actions:
+- id: write-note
+  method: POST
+  path: /notes
+  body:
+    text: unrelated
+  expect:
+    status: 201
+- id: create-order
+  method: POST
+  path: /orders
+  body:
+    amount: 500
+  expect:
+    status: 201
+  capture:
+    order_id: /id
+- id: pay-order
+  method: POST
+  path: /orders/{{order_id}}/pay
+- id: partial-refund
+  method: POST
+  path: /orders/{{order_id}}/refund
+  depends_on:
+  - pay-order
+- id: another-note
+  method: POST
+  path: /notes
+  expect:
+    status: 201
+candidate:
+- id: new-can-read
+  path: /orders
+verify:
+- id: old-still-reads
+  path: /orders
+  expect:
+    assertions:
+    - pointer: /0/amount
+      op: eq
+      value: 100
+analysis:
+  max_trials: 40
+  confirmations: 2
